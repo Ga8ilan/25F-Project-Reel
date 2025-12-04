@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from backend.admin_routes import admin_bp
 
 from backend.db_connection import db
 from backend.simple.simple_routes import simple_routes
@@ -50,6 +51,7 @@ def create_app():
     app.logger.info("create_app(): registering blueprints with Flask app object.")
     app.register_blueprint(simple_routes)
     app.register_blueprint(ngos, url_prefix="/ngo")
+    app.register_blueprint(admin_bp)
 
     # Don't forget to return the app object
     return app

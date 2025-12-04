@@ -5,7 +5,7 @@ admin_bp = Blueprint("admin", __name__)
 
 #APPLICATION REVIEW ROUTES 
 
-@admin_bp.get("applications")
+@admin_bp.get("/applications")
 def get_applications(): 
     """
     List pending/approved applications for admin review.
