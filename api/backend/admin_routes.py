@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+
+admin_bp = Blueprint("admin", __name__)
 #blueprint for admin routes
 
 #APPLICATION REVIEW ROUTES 
@@ -13,7 +15,7 @@ def get_applications():
     return jsonify({"message": "stub GET /applications"}), 200
 
 @admin_bp.get("/applications/int:application_id>")
-def get_application_details(application_id)
+def get_application_details(application_id):
     """
     Get full details for a specific application. 
     [William-2]
