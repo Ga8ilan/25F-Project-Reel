@@ -12,7 +12,7 @@ def list_portfolios():
     return jsonify({"message": "stub GET /portfolios"}), 200
 
 @creator_bp.post("/portfolios")
-def create_portfolios():
+def create_portfolio():
     """
     Create a new portfolio.
     """
@@ -22,14 +22,14 @@ def create_portfolios():
 # Projects: 
 
 @creator_bp.get("/projects")
-def list_portfolios():
+def list_project():
     """
     List projects in the system.
     """
     return jsonify({"message": "stub GET /projects"}), 200
 
 @creator_bp.post("/projects")
-def create_portfolios():
+def create_project():
     """
     Create a new project. 
     """

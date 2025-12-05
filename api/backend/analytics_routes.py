@@ -2,6 +2,13 @@ from flask import Blueprint, jsonify, request
 
 analytics_bp = Blueprint("analytics", __name__)
 
+@analytics_bp.get("/analytics-health")
+def analytics_health():
+    """
+    health check for analytics blueprint
+    """
+    return jsonify({"message": "analytics blueprint is working"}), 200
+
 #CREATOR LIST / DISCOVERY 
 @analytics_bp.get("/creators")
 def list_creators():
@@ -56,4 +63,15 @@ def update_insight(insight_id):
         "message": "stub PUT /insights/<id>",
         "insight_id": insight_id,
         "updates": data
+    }), 200
+
+@analytics_bp.delete("/insights/<int:insight_id>")
+def delete_insight(insight_id):
+    """
+    delete existing insight record
+    """
+    # TODO: DELETE FROM Insight WHERE insightID = ?
+    return jsonify({
+        "message": "stub DELETE /insights/<id>",
+        "insight_id": insight_id
     }), 200

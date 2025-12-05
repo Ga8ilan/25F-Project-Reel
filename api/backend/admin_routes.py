@@ -14,7 +14,7 @@ def get_applications():
     # TODO: SELECT * FROM Applications WHERE status IN(...)
     return jsonify({"message": "stub GET /applications"}), 200
 
-@admin_bp.get("/applications/int:application_id>")
+@admin_bp.get("/applications/<int:application_id>")
 def get_application_details(application_id):
     """
     Get full details for a specific application. 
@@ -38,6 +38,17 @@ def update_application_status(application_id):
         "application_id": application_id, 
         "status_change": data, 
         "message": "stub PUT /applications/<id>"
+    }), 200
+
+@admin_bp.delete("/applications/<int:application_id>")
+def delete_application(application_id):
+    """
+    delete application (i.e., withdrawn or test applications)
+    """
+    # TODO: DELETE FROM Applications WHERE applicationID = ? 
+    return jsonify({
+        "application_id": application_id,
+        "message": "stub DELETE /applications/<id>"
     }), 200
 
 #FLAGGED ACTIVITIES 
