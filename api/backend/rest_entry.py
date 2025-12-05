@@ -4,6 +4,8 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 from backend.admin_routes import admin_bp
+from backend.social_routes import social_bp
+from backend.analytics_routes import analytics_bp
 
 from backend.db_connection import db
 from backend.simple.simple_routes import simple_routes
@@ -52,6 +54,8 @@ def create_app():
     app.register_blueprint(simple_routes)
     app.register_blueprint(ngos, url_prefix="/ngo")
     app.register_blueprint(admin_bp)
+    app.register_blueprint(social_bp)
+    app.register_blueprint(analytics_bp)
 
     # Don't forget to return the app object
     return app
