@@ -1,3 +1,76 @@
+# Reel by Fontenot's Robots – CS 3200 Fall 2025 Project
+
+## Project Overview
+
+_Reel by Fontenot’s Robots_ is a creator-focused content platform that supports multiple roles:
+- **Admins** – review creator applications, monitor system health, and moderate flagged activity.
+- **Creators** – manage portfolios and projects representing their work.
+- **Community / Social Users** – create posts and send messages.
+- **Analytics Users** – view insights, trending tags, and creator discovery features.
+
+---
+
+## REST API Implementation
+
+Our team built the full REST API structure based on our REST Matrix and user stories.  
+This included:
+
+### Four Blueprint Modules
+Each blueprint contains **5 or more routes**, meeting the project requirement.
+
+#### **1. Admin Blueprint** (`admin_routes.py`)
+Handles application review and system oversight.
+- `GET /applications`
+- `GET /applications/<id>`
+- `PUT /applications/<id>`
+- `DELETE /applications/<id>`
+- `GET /flagged-activities`
+- `GET /system-metrics`
+
+#### **2. Creator Blueprint** (`creator_routes.py`)
+Handles portfolios and projects.
+- `GET /portfolios`
+- `POST /portfolios`
+- `GET /projects`
+- `POST /projects`
+- `PUT /projects/<id>`
+
+#### **3. Social Blueprint** (`social_routes.py`)
+Handles posts and messaging features.
+- `GET /posts`
+- `POST /posts`
+- `PUT /posts/<id>`
+- `GET /messages`
+- `POST /messages`
+
+#### **4. Analytics Blueprint** (`analytics_routes.py`)
+Supports platform-level insights and discovery.
+- `GET /analytics-health`
+- `GET /creators`
+- `GET /trending-tags`
+- `GET /insights`
+- `POST /insights`
+- `PUT /insights/<id>`
+- `DELETE /insights/<id>`
+
+---
+
+## HTTP Methods Used Across the API
+
+Our implementation uses all required HTTP methods:
+
+- **GET** – Fetch lists or resource details  
+- **POST** – Create new resources  
+- **PUT** – Update existing records  
+- **DELETE** – Remove records  
+
+We implemented **DELETE** in at least two separate blueprints (`admin` and `analytics`) as required.
+
+
+
+
+
+
 # Fall 2025 CS 3200 Project Template
 
 This is a template repo for Dr. Fontenot's Fall 2025 CS 3200 Course Project. 
