@@ -54,7 +54,7 @@ def create_app():
     app.logger.info("create_app(): registering blueprints with Flask app object.")
     app.register_blueprint(simple_routes)
     app.register_blueprint(ngos, url_prefix="/ngo")
-    app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(social_bp)
     app.register_blueprint(analytics_bp)
     app.register_blueprint(creator_bp)
