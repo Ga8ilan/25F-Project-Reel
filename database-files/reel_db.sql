@@ -91,6 +91,25 @@ CREATE TABLE IF NOT EXISTS Messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- USERS TABLE
+CREATE TABLE IF NOT EXISTS Users (
+    user_id         INT AUTO_INCREMENT PRIMARY KEY,
+    name            VARCHAR(255) NOT NULL,
+    email           VARCHAR(255) NOT NULL UNIQUE,
+    role            VARCHAR(100),
+    location        VARCHAR(255),
+    primary_styles  VARCHAR(255),        -- e.g. "comedy, drama"
+    tools           VARCHAR(255),        -- e.g. "Premiere, Resolve"
+    headline        VARCHAR(255),
+    bio             TEXT,
+    socials         VARCHAR(500),        -- simple JSON-ish or comma-separated
+    is_creator      BOOLEAN DEFAULT FALSE,
+    market          VARCHAR(100),        -- e.g. "NYC", "LA", "London"
+    credit_momentum INT DEFAULT 0,       -- simple int for “heat”
+    is_active       BOOLEAN DEFAULT TRUE,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CREATOR ROUTES
 CREATE TABLE IF NOT EXISTS Portfolios (
     portfolio_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -114,11 +133,23 @@ CREATE TABLE IF NOT EXISTS Projects (
 );
 
 CREATE TABLE IF NOT EXISTS ProjectCredits (
-    credit_id INT AUTO_INCREMENT PRIMARY KEY,
-    project_id INT NOT NULL,
-    user_id INT NOT NULL,
-    role VARCHAR(255),
-    verified BOOLEAN DEFAULT FALSE
+    credit_id   INT AUTO_INCREMENT PRIMARY KEY,
+    project_id  INT NOT NULL,
+    user_id     INT NOT NULL,
+    role        VARCHAR(255),
+    verified    BOOLEAN DEFAULT FALSE,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS ProjectMedia (
+    media_id    INT AUTO_INCREMENT PRIMARY KEY,
+    project_id  INT NOT NULL,
+    media_url   VARCHAR(500) NOT NULL,
+    media_type  VARCHAR(50),     -- e.g. 'reel', 'self-tape', 'still'
+    caption     TEXT,
+    alt_text    VARCHAR(255),
+    sort_order  INT DEFAULT 0,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ANALYTICS TABLES 
