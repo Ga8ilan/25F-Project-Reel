@@ -120,3 +120,33 @@ CREATE TABLE IF NOT EXISTS ProjectCredits (
     role VARCHAR(255),
     verified BOOLEAN DEFAULT FALSE
 );
+
+-- ANALYTICS TABLES 
+-- TREND TAGS TABLE
+CREATE TABLE IF NOT EXISTS TrendTags (
+    tag_id INT AUTO_INCREMENT PRIMARY KEY,
+    tag_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    usage_count INT DEFAULT 0,
+    status ENUM('active','archived') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- KPIS TABLE
+CREATE TABLE IF NOT EXISTS Kpis (
+    kpi_id INT AUTO_INCREMENT PRIMARY KEY,
+    kpi_name VARCHAR(100) NOT NULL,
+    formula TEXT NOT NULL,
+    status ENUM('active','archived') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- INSIGHT REPORTS TABLE
+CREATE TABLE IF NOT EXISTS InsightReports (
+    report_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    tags VARCHAR(255),
+    sharing_scope ENUM('private','team','public') DEFAULT 'private',
+    report_data TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
