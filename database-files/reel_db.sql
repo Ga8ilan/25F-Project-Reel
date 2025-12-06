@@ -90,3 +90,33 @@ CREATE TABLE IF NOT EXISTS Messages (
     is_deleted_by_receiver BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CREATOR ROUTES
+CREATE TABLE IF NOT EXISTS Portfolios (
+    portfolio_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    headline VARCHAR(255),
+    bio TEXT,
+    featured_projects JSON,
+    is_archived BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS Projects (
+    project_id INT AUTO_INCREMENT PRIMARY KEY,
+    portfolio_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    tags VARCHAR(255),
+    visibility ENUM('public', 'private') DEFAULT 'public',
+    is_archived BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS ProjectCredits (
+    credit_id INT AUTO_INCREMENT PRIMARY KEY,
+    project_id INT NOT NULL,
+    user_id INT NOT NULL,
+    role VARCHAR(255),
+    verified BOOLEAN DEFAULT FALSE
+);
