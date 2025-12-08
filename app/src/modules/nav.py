@@ -14,73 +14,60 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
-    st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
-    )
-
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def UserOnboardingStatsNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="User Onboarding Stats", icon="📊"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
-
-
-def SystemAlertsNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="System Alerts", icon="🚨")
-
+#### ------------------------ Admin Role (William) ------------------------
+def AdminHomeNav():
+    st.sidebar.page_link("pages/20_Admin_Home.py", label="Admin Dashboard", icon="🖥️")
 
 def PendingApprovalsNav():
-    st.sidebar.page_link("pages/03_Pending_Approvals.py", label="Pending Approvals", icon="📋")
+    st.sidebar.page_link("pages/21_Pending_Approvals.py", label="Pending Approvals", icon="📋")
+
+def SystemAlertsNav():
+    st.sidebar.page_link("pages/22_System_Alerts.py", label="System Alerts", icon="🚨")
+
+def FlaggedActivitiesNav():
+    st.sidebar.page_link("pages/23_Flagged_Activities.py", label="Flagged Activities", icon="🚩")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+#### ------------------------ Analytics Role (Chris) ------------------------
+def AnalyticsHomeNav():
+    st.sidebar.page_link("pages/10_Analytics_Home.py", label="Analytics Dashboard", icon="📈")
 
-def usaidWorkerHomeNav():
-    st.sidebar.page_link(
-      "pages/10_USAID_Worker_Home.py", label="USAID Worker Home", icon="🏠"
-    )
+def RisingCreatorsNav():
+    st.sidebar.page_link("pages/11_Rising_Creators.py", label="Rising Creators", icon="⭐")
 
-def NgoDirectoryNav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
+def TrendAnalyticsNav():
+    st.sidebar.page_link("pages/12_Trend_Analytics.py", label="Trend Analytics", icon="📊")
 
-def AddNgoNav():
-    st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
-
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-def PredictionNav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
-
-def ClassificationNav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
+def KPIConfigNav():
+    st.sidebar.page_link("pages/13_KPI_Config.py", label="KPI & Trend Config", icon="⚙️")
 
 
+#### ------------------------ Creator Role (Mike) ------------------------
+def CreatorHomeNav():
+    st.sidebar.page_link("pages/30_Creator_Home.py", label="Creator Dashboard", icon="🎬")
+
+def ManagePortfolioNav():
+    st.sidebar.page_link("pages/31_Manage_Portfolio.py", label="Manage Portfolio", icon="📁")
+
+def ManageProjectsNav():
+    st.sidebar.page_link("pages/32_Manage_Projects.py", label="Manage Projects", icon="🎥")
+
+def CollaborationsNav():
+    st.sidebar.page_link("pages/33_Collaborations.py", label="Collaborations", icon="🤝")
 
 
+#### ------------------------ Community/Social Role (Veronica) ------------------------
+def CommunityHomeNav():
+    st.sidebar.page_link("pages/40_Community_Home.py", label="Community Home", icon="🏠")
 
-#### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+def SocialFeedNav():
+    st.sidebar.page_link("pages/41_Social_Feed.py", label="Social Feed", icon="📱")
+
+def MessagesNav():
+    st.sidebar.page_link("pages/42_Messages.py", label="Messages", icon="💬")
+
+def CreatePostNav():
+    st.sidebar.page_link("pages/43_Create_Post.py", label="Create Post", icon="➕")
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -104,26 +91,33 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
-
-        # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            usaidWorkerHomeNav()
-            NgoDirectoryNav()
-            AddNgoNav()
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
-            
-
-        # If the user is an administrator, give them access to the administrator pages
-        if st.session_state["role"] == "administrator":
-            AdminPageNav()
-            UserOnboardingStatsNav()
-            SystemAlertsNav()
+        # Admin role (William)
+        if st.session_state["role"] == "admin":
+            AdminHomeNav()
             PendingApprovalsNav()
+            SystemAlertsNav()
+            FlaggedActivitiesNav()
+
+        # Analytics role (Chris)
+        if st.session_state["role"] == "analytics":
+            AnalyticsHomeNav()
+            RisingCreatorsNav()
+            TrendAnalyticsNav()
+            KPIConfigNav()
+
+        # Creator role (Mike)
+        if st.session_state["role"] == "creator":
+            CreatorHomeNav()
+            ManagePortfolioNav()
+            ManageProjectsNav()
+            CollaborationsNav()
+
+        # Community/Social role (Veronica)
+        if st.session_state["role"] == "community":
+            CommunityHomeNav()
+            SocialFeedNav()
+            MessagesNav()
+            CreatePostNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
@@ -133,4 +127,6 @@ def SideBarLinks(show_home=False):
         if st.sidebar.button("Logout"):
             del st.session_state["role"]
             del st.session_state["authenticated"]
+            if "first_name" in st.session_state:
+                del st.session_state["first_name"]
             st.switch_page("Home.py")
