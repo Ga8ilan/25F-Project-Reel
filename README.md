@@ -155,7 +155,3 @@ Start the system using Docker:
 - docker compose up --build
 
 
-
-
-pages/11_Prediction.py`. Here, I create two numeric input fields. When the button is pressed, it makes a request to the REST API URL `/c/prediction/.../...` function and passes the values from the two inputs as URL parameters. It gets back the results from the route and displays them. Nothing fancy here.
-hello
