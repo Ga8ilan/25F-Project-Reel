@@ -4,14 +4,13 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.write("# About this App")
+st.write("# REEL 📸")
 
 st.markdown(
     """
-    This is a demo app for Data and Software in International Government and Politics Dialogue 2025 Project Course.  
+    WELCOME TO REEL. 
 
-    The goal of this demo is to provide information on the tech stack 
-    being used as well as demo some of the features of the various platforms. 
+    Reel is an invite-only, portfolio-first professional network built for creatives and the brands that hire them. Where LinkedIn overwhelms with noise and generic resumes, Reel elevates proven creative work by showcasing reels, credits, and verified collaborators. The app curates a high-quality ecosystem of filmmakers, designers, animators, photographers, editors, musicians, and creative directors, alongside vetted companies and agencies seeking talent. By collecting structured portfolio data, analyzing collaboration networks, and tracking availability and project metadata, Reel helps both sides make faster, better-informed decisions. 
 
     Stay tuned for more information and features to come!
     """
