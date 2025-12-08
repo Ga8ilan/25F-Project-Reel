@@ -1,12 +1,35 @@
 import streamlit as st
 import requests
+import pandas as pd
+import plotly.express as px
 from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
+
+st.set_page_config(layout='wide')
 
 # Initialize sidebar
 SideBarLinks()
 
 st.title("Add New NGO")
+
+# API endpoint for creators
+CREATORS_URL = "http://web-api:4000/creator/creators"
+
+# Fetch top creators
+@st.cache_data(ttl=300)
+def fetch_top_creators(limit=10):
+    """Fetch top creators by credit momentum"""
+    try:
+        response = requests.get(CREATORS_URL, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            creators = data.get('creators', [])
+            # Sort by credit_momentum descending and return top N
+            sorted_creators = sorted(creators, key=lambda x: x.get('credit_momentum', 0), reverse=True)
+            return sorted_creators[:limit]
+        return []
+    except:
+        return []
 
 # Initialize session state for modal
 if "show_success_modal" not in st.session_state:
@@ -99,6 +122,62 @@ with st.form(f"add_ngo_form_{st.session_state.form_key_counter}"):
 if st.session_state.show_success_modal:
     show_success_dialog(st.session_state.success_ngo_name)
 
+# Top Creators Section
+st.write("---")
+st.subheader("🌟 Top Creators")
+
+top_creators = fetch_top_creators(10)
+
+if top_creators:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.write("**Top Creators by Credit Momentum**")
+        creators_df = pd.DataFrame(top_creators)
+        
+        if not creators_df.empty and 'credit_momentum' in creators_df.columns:
+            # Create bar chart
+            fig_creators = px.bar(
+                creators_df.head(10),
+                x='name',
+                y='credit_momentum',
+                title="Top 10 Creators by Credit Momentum",
+                labels={'name': 'Creator Name', 'credit_momentum': 'Credit Momentum'},
+                color='credit_momentum',
+                color_continuous_scale='Viridis'
+            )
+            fig_creators.update_xaxes(tickangle=45)
+            st.plotly_chart(fig_creators, use_container_width=True)
+        else:
+            st.info("No creator data available")
+    
+    with col2:
+        st.write("**Creator Details**")
+        if not creators_df.empty:
+            # Display top creators in a table
+            display_cols = ['name', 'credit_momentum', 'location', 'market', 'primary_styles']
+            available_cols = [col for col in display_cols if col in creators_df.columns]
+            
+            if available_cols:
+                display_creators = creators_df[available_cols].head(10)
+                # Rename columns for display
+                col_mapping = {
+                    'name': 'Name',
+                    'credit_momentum': 'Credit Momentum',
+                    'location': 'Location',
+                    'market': 'Market',
+                    'primary_styles': 'Primary Styles'
+                }
+                display_creators = display_creators.rename(columns=col_mapping)
+                st.dataframe(display_creators, use_container_width=True, hide_index=True)
+            else:
+                st.info("Creator details not available")
+        else:
+            st.info("No creators available")
+else:
+    st.info("Top creators data is currently unavailable. Please check API connection.")
+
 # Add a button to return to the NGO Directory
+st.write("---")
 if st.button("Return to NGO Directory"):
     st.switch_page("pages/14_NGO_Directory.py")

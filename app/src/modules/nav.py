@@ -27,8 +27,22 @@ def WorldBankVizNav():
     )
 
 
+def UserOnboardingStatsNav():
+    st.sidebar.page_link(
+        "pages/01_World_Bank_Viz.py", label="User Onboarding Stats", icon="📊"
+    )
+
+
 def MapDemoNav():
     st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+
+
+def SystemAlertsNav():
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="System Alerts", icon="🚨")
+
+
+def PendingApprovalsNav():
+    st.sidebar.page_link("pages/03_Pending_Approvals.py", label="Pending Approvals", icon="📋")
 
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
@@ -93,8 +107,6 @@ def SideBarLinks(show_home=False):
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "pol_strat_advisor":
             PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "usaid_worker":
@@ -109,6 +121,9 @@ def SideBarLinks(show_home=False):
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
+            UserOnboardingStatsNav()
+            SystemAlertsNav()
+            PendingApprovalsNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
