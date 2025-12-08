@@ -47,42 +47,38 @@ st.write('#### HI! As which user would you like to log in?')
 if st.button("Act as William, a platform administrator", 
             type = 'primary', 
             use_container_width=True):
-    # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
-    # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'John'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    st.session_state['role'] = 'admin'
+    st.session_state['first_name'] = 'William'
+    logger.info("Logging in as Admin William")
+    st.switch_page('pages/20_Admin_Home.py')
 
 if st.button('Act as Chris Parker, a data analyst', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.session_state['role'] = 'analytics'
+    st.session_state['first_name'] = 'Chris'
+    logger.info("Logging in as Data Analyst Chris")
+    st.switch_page('pages/10_Analytics_Home.py')
 
-if st.button('Act as Mike Walson, a user', 
+if st.button('Act as Mike Walston, a creator', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.session_state['role'] = 'creator'
+    st.session_state['first_name'] = 'Mike'
+    logger.info("Logging in as Creator Mike")
+    st.switch_page('pages/30_Creator_Home.py')
 
-
-if st.button('Act as Veronica Fuller, a user',
+if st.button('Act as Veronica Fuller, a community user',
                 type = 'primary',
                 use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/04_User_Home.py')
+    st.session_state['role'] = 'community'
+    st.session_state['first_name'] = 'Veronica'
+    logger.info("Logging in as Community User Veronica")
+    st.switch_page('pages/40_Community_Home.py')
 
 
 
